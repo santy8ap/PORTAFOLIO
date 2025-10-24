@@ -30,7 +30,7 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
   if (!project) return notFound();
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#0a0014] to-[#1a0029] text-white px-6 py-16">
+    <section className="min-h-screen flex flex-col items-center justify-center  from-[#0a0014] to-[#1a0029] text-white px-6 py-16">
       <div className="max-w-4xl w-full bg-[#0f001c]/60 backdrop-blur-md rounded-2xl p-8 border border-purple-500/20 shadow-xl">
         <Image
           src={project.image}
@@ -57,7 +57,7 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
         <Link
           href={project.github}
           target="_blank"
-          className="inline-block bg-gradient-to-r from-purple-600 to-fuchsia-700 px-6 py-3 rounded-md font-semibold hover:scale-105 transition-transform"
+          className="inline-block  from-purple-600 to-fuchsia-700 px-6 py-3 rounded-md font-semibold hover:scale-105 transition-transform"
         >
           Ver en GitHub
         </Link>
