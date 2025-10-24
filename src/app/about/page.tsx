@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Shield, Brain, Code2, Terminal, Lock } from "lucide-react";
+import { Shield, Brain, Code2, } from "lucide-react";
 
 export default function AboutPage() {
   return (
@@ -15,7 +15,7 @@ export default function AboutPage() {
         transition={{ duration: 1 }}
         className="text-center relative z-10"
       >
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-purple-300 via-purple-400 to-fuchsia-500 bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-6xl font-extrabold mb-6  from-purple-300 via-purple-400 to-fuchsia-500 bg-clip-text text-transparent">
           Hola, soy <span className="text-purple-400">SantiDev</span>
         </h1>
         <p className="text-lg md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -157,7 +157,7 @@ export default function AboutPage() {
       >
         <Link
           href="/projects"
-          className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-fuchsia-700 text-white font-semibold shadow-[0_0_25px_rgba(192,132,252,0.5)] hover:shadow-[0_0_40px_rgba(217,70,239,0.8)] hover:scale-105 transition-all duration-300"
+          className="px-8 py-3 rounded-full  from-purple-600 to-fuchsia-700 text-white font-semibold shadow-[0_0_25px_rgba(192,132,252,0.5)] hover:shadow-[0_0_40px_rgba(217,70,239,0.8)] hover:scale-105 transition-all duration-300"
         >
           Ver mis proyectos
         </Link>
