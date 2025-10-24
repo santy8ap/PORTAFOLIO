@@ -69,17 +69,18 @@ export default function ProjectsPage() {
         }}
       >
         {projects.map((project) => (
-          <motion.a
+          <motion.div
             key={project.slug}
-            href={project.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group rounded-2xl overflow-hidden border border-purple-800/50 bg-linear-to-br from-purple-900/20 via-purple-950/10 to-black/30 shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:brightness-110 hover:border-purple-600 transition-all duration-500 backdrop-blur-sm block"
             variants={{
               hidden: { opacity: 0, y: 10 },
               visible: { opacity: 1, y: 1 },
             }}
             whileHover={{ scale: 1.02 }}
+            className="rounded-2xl overflow-hidden border border-purple-800/50 
+                       bg-linear-to-br from-purple-900/20 via-purple-950/10 to-black/30 
+                       shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] 
+                       hover:brightness-110 hover:border-purple-600 
+                       transition-all duration-500 backdrop-blur-sm"
           >
             {/* ==== Imagen ==== */}
             <div className="relative w-full h-56 md:h-64 overflow-hidden">
@@ -90,13 +91,13 @@ export default function ProjectsPage() {
                 priority
                 className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500" />
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-all duration-500" />
             </div>
 
             {/* ==== Info ==== */}
             <div className="p-6 flex flex-col justify-between h-full">
               <div>
-                <h2 className="text-xl md:text-2xl font-bold mb-3 text-purple-200 group-hover:text-purple-300 transition-colors duration-300">
+                <h2 className="text-xl md:text-2xl font-bold mb-3 text-purple-200 transition-colors duration-300">
                   {project.title}
                 </h2>
                 <p className="text-gray-300 text-sm leading-relaxed mb-5">
@@ -116,15 +117,21 @@ export default function ProjectsPage() {
                 </div>
               </div>
 
-              {/* Icono GitHub */}
+              {/* ==== Botón del repositorio ==== */}
               <div className="mt-6 flex justify-end">
-                <div className="flex items-center gap-2 text-sm bg-purple-700/60 hover:bg-purple-700 px-3 py-1.5 rounded-lg shadow-md hover:shadow-purple-500/30 transition-all duration-300">
-                  <Github size={16} />
-                  <span>Ver repositorio</span>
-                </div>
+                <a
+                  href={project.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm bg-purple-700/60 hover:bg-purple-700 
+                             px-3 py-1.5 rounded-lg shadow-md hover:shadow-purple-500/30 
+                             transition-all duration-300"
+                >
+                  <Github size={16} /> Ver repositorio
+                </a>
               </div>
             </div>
-          </motion.a>
+          </motion.div>
         ))}
       </motion.div>
     </section>
