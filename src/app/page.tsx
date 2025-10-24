@@ -1,65 +1,90 @@
-import Image from "next/image";
+"use client";
+import dynamic from "next/dynamic";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+// Carga dinámica del componente Spline
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="text-purple-400 animate-pulse">Cargando experiencia 3D...</div>
+    </div>
+  ),
+});
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden text-center px-6">
+      {/* ==== Fondo interactivo Spline (pantalla completa, detrás de todo) ==== */}
+      <div className="fixed inset-0 z-0">
+        <Spline
+          scene="https://prod.spline.design/CEC02qzJ9FCK9tIM/scene.splinecode"
+          className="w-full h-full"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* Capa oscura para contraste del texto */}
+        <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-black/80 pointer-events-none" />
+      </div>
+
+      {/* ==== Contenido principal (por encima de Spline) ==== */}
+      <div className="relative z-10 flex flex-col items-center">
+        {/* ==== Título principal ==== */}
+        <motion.h1
+          className="text-5xl md:text-7xl font-extrabold mb-6 bg-linear-to-r from-purple-300 via-purple-400 to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(168,85,247,0.5)]"
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1 }}
+        >
+          Hola, soy <span className="text-purple-400 font-extrabold">SantiDev</span>
+        </motion.h1>
+
+        {/* ==== Subtítulo ==== */}
+        <motion.p
+          className="text-lg md:text-2xl text-gray-300 max-w-2xl mb-16 leading-relaxed"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 1 }}
+        >
+          Desarrollador <span className="text-purple-400">Fullstack</span>, apasionado por la{" "}
+          <span className="text-purple-300">inteligencia artificial</span> y la{" "}
+          <span className="text-purple-300">ciberseguridad</span>.  
+          Me enfoco en crear soluciones digitales con propósito y diseño funcional.
+        </motion.p>
+
+        {/* ==== Botones ==== */}
+        <motion.div
+          className="flex flex-wrap gap-5 justify-center mb-14"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 1 }}
+        >
+          <Link
+            href="/projects"
+            className="px-7 py-3 rounded-full bg-linear-to-r from-purple-600 to-fuchsia-700 text-white font-semibold shadow-[0_0_25px_rgba(192,132,252,0.5)] hover:shadow-[0_0_40px_rgba(217,70,239,0.8)] hover:scale-105 transition-all duration-300"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Ver proyectos
+          </Link>
+          <Link
+            href="/about"
+            className="px-7 py-3 rounded-full border border-purple-600 text-gray-300 hover:text-white hover:border-purple-400 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:scale-105 transition-all duration-300"
           >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            Sobre mí
+          </Link>
+        </motion.div>
+      </div>
+
+      {/* ==== Indicador de scroll (más abajo, fuera de los botones) ==== */}
+      <motion.div
+        className="absolute bottom-10 text-gray-400 animate-bounce text-sm tracking-wide z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 1.5 }}
+      >
+        Desliza para explorar
+      </motion.div>
+
+      {/* ==== Glow de fondo sutil ==== */}
+      <div className="absolute z-5 top-1/2 left-1/2 w-[90vw] h-[90vw] bg-purple-700/20 blur-[150px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+    </section>
   );
 }
