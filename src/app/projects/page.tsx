@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Github } from "lucide-react";
-
 
 const projects = [
   {
@@ -47,8 +45,6 @@ const projects = [
 export default function ProjectsPage() {
   return (
     <section className="max-w-7xl mx-auto py-20 px-6 text-white relative">
- 
-
       {/* ==== Título ==== */}
       <motion.h1
         initial={{ opacity: 0, y: -40 }}
@@ -73,71 +69,64 @@ export default function ProjectsPage() {
         }}
       >
         {projects.map((project) => (
-          <motion.div
+          <motion.a
             key={project.slug}
+            href={project.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group rounded-2xl overflow-hidden border border-purple-800/50 bg-linear-to-br from-purple-900/20 via-purple-950/10 to-black/30 shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:brightness-110 hover:border-purple-600 transition-all duration-500 backdrop-blur-sm block"
             variants={{
               hidden: { opacity: 0, y: 10 },
               visible: { opacity: 1, y: 1 },
             }}
+            whileHover={{ scale: 1.02 }}
           >
-           <div className="group rounded-2xl overflow-hidden border border-purple-800/50 bg-linear-to-br from-purple-900/20 via-purple-950/10 to-black/30 shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:brightness-110 hover:border-purple-600 transition-all duration-500 backdrop-blur-sm">
-              {/* ==== Imagen ==== */}
-              <Link href={`/projects/${project.slug}`}>
-                <div className="relative w-full h-56 md:h-64 overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    priority
-                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-all duration-500" />
+            {/* ==== Imagen ==== */}
+            <div className="relative w-full h-56 md:h-64 overflow-hidden">
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                priority
+                className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+              />
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500" />
+            </div>
+
+            {/* ==== Info ==== */}
+            <div className="p-6 flex flex-col justify-between h-full">
+              <div>
+                <h2 className="text-xl md:text-2xl font-bold mb-3 text-purple-200 group-hover:text-purple-300 transition-colors duration-300">
+                  {project.title}
+                </h2>
+                <p className="text-gray-300 text-sm leading-relaxed mb-5">
+                  {project.description}
+                </p>
+
+                {/* Stack */}
+                <div className="flex flex-wrap gap-2">
+                  {project.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs bg-purple-800/30 border border-purple-700 px-3 py-1 rounded-full text-gray-200 tracking-wide"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-              </Link>
+              </div>
 
-              
-
-              {/* ==== Info ==== */}
-              <div className="p-6 flex flex-col justify-between">
-                <div>
-                  <h2 className="text-xl md:text-2xl font-bold mb-3 text-purple-200 group-hover:text-purple-300 transition-colors duration-300">
-                    {project.title}
-                  </h2>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-5">
-                    {project.description}
-                  </p>
-
-                  {/* Stack */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs bg-purple-800/30 border border-purple-700 px-3 py-1 rounded-full text-gray-200 tracking-wide"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* ==== Botones ==== */}
-                <div className="mt-6 flex justify-between items-center">
-               
-                  <a
-                    href={project.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm bg-purple-700/60 hover:bg-purple-700 px-3 py-1.5 rounded-lg shadow-md hover:shadow-purple-500/30 transition-all duration-300"
-                  >
-                    <Github size={16} /> Repositorio
-                  </a>
+              {/* Icono GitHub */}
+              <div className="mt-6 flex justify-end">
+                <div className="flex items-center gap-2 text-sm bg-purple-700/60 hover:bg-purple-700 px-3 py-1.5 rounded-lg shadow-md hover:shadow-purple-500/30 transition-all duration-300">
+                  <Github size={16} />
+                  <span>Ver repositorio</span>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </motion.a>
         ))}
       </motion.div>
     </section>
-    
   );
 }
